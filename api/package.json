@@ -2,7 +2,7 @@
   "name": "chat-app-api",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "author": "azusaw",
   "dependencies": {
     "express": "^4.18.2",

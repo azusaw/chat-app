@@ -1,122 +1,89 @@
 <script>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-import { ref } from 'vue'
-const input = ref('')
-import io from 'socket.io-client';
-import SocketioService from './services/socketio.service.js';
+import { RouterLink, RouterView } from "vue-router";
+import io from "socket.io-client";
 
 export default {
   data() {
     return {
+      message: "",
+      activeUsers: new Set(),
       messages: [],
-      socket: io('localhost:5001', {
-      withCredentials: true
-    })
-    }
+      userName: "user-" + Math.floor(Math.random() * 1000000),
+      socket: io("localhost:5001", {
+        withCredentials: true,
+      }),
+    };
   },
   methods: {
-    sendMessage(message) {
-      // send a message to server
-      this.socket.emit('SEND_MESSAGE', {message});
-    }
+    // send a message to server
+    sendMessage: function () {
+      console.log("send", this.message);
+      this.socket.emit("chat message", {
+        message: this.message,
+        nick: this.userName,
+      });
+      this.message = "";
+    },
   },
   mounted() {
-    // receive an update from server
-    this.socket.on('MESSAGE', (data) => {
-      this.messages = [...this.messages, data];
-    });
-  }
-}
+    //emit an event with the user id
+    this.socket.emit("user connected", this.userName);
 
+    //when a new user joined
+    this.socket.on("new user connected", (data) => {
+      data.map((user) => this.activeUsers?.add(user));
+      console.log("new user", this.activeUsers);
+    });
+
+    //when a user leaves
+    this.socket.on("user disconnected", (data) => {
+      console.log("bye bye", data);
+      this.activeUsers?.remove(userName);
+    });
+
+    //when a new message is received
+    this.socket.on("chat message", (data) => {
+      console.log("new message", data.nick, data.message);
+      this.messages?.push(data);
+    });
+  },
+};
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <img
+    alt="Vue logo"
+    class="logo"
+    src="@/assets/logo.svg"
+    width="125"
+    height="125"
+  />
 
-    <div class="wrapper">
-<!--      <HelloWorld msg="You did it!" />-->
-<!--      <nav>-->
-<!--        <RouterLink to="/">Home</RouterLink>-->
-<!--        <RouterLink to="/about">About</RouterLink>-->
-<!--      </nav>-->
+  <div class="wrapper">
+    <!--      <nav>-->
+    <!--        <RouterLink to="/">Home</RouterLink>-->
+    <!--        <RouterLink to="/about">About</RouterLink>-->
+    <!--      </nav>-->
+    <div>
+      <h1>Chat</h1>
+      <ul>
+        <li v-for="(msg, idx) in messages" :key="idx">{{ msg }}</li>
+      </ul>
       <div>
-        <h1>Chat</h1>
-        <ul>
-          <li v-for="(msg, index) in messages" :key="index">{{msg}}</li>
-        </ul>
-        <div>
-          <input type="text" @keyup.enter="sendMessage()" v-model="message">
-        </div>
+        <input type="text" @keyup.enter="sendMessage()" v-model="message" />
+        {{ this.message }}
       </div>
-
     </div>
-  </header>
-
-<!--  <RouterView />-->
+    <div class="sidenav">
+      <div class="inbox__people">
+        <h4>Active users</h4>
+        <li v-for="user in activeUsers" :key="user">
+          {{ user }}
+        </li>
+      </div>
+    </div>
+  </div>
+  <!--  <RouterView />-->
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
-</style>
+<style scoped></style>
