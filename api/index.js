@@ -17,31 +17,45 @@ const io = socket(index, {
     origin: "http://localhost:3000",
     credentials: true,
   },
+  pingTimeout: 4000,
+  pingInterval: 4000,
 });
 
 //we use a set to store users, sets objects are for unique values of any type
 const activeUsers = new Set();
+const typingUsers = new Set();
 
 io.on("connection", function (socket) {
   console.log("Made socket connection");
 
   socket.on("user connected", function (data) {
-    console.log("user connected", data);
     socket.userName = data;
-    activeUsers.add(data);
-    console.log(activeUsers);
-    //... is the the spread operator, adds to the set while retaining what was in there already
+    activeUsers.add(socket.userName);
     io.emit("new user connected", [...activeUsers]);
-  });
-
-  socket.on("user disconnect", function () {
-    console.log("bye bye");
-    activeUsers.delete(socket.userName);
-    io.emit("disconnected", socket.userName);
   });
 
   socket.on("chat message", function (data) {
     console.log("chat message", data);
     io.emit("chat message", data);
+    typingUsers.delete(data.userName);
+    io.emit("typing", [...typingUsers]);
+  });
+
+  socket.on("start typing", function () {
+    typingUsers.add(socket.userName);
+    io.emit("typing", [...typingUsers]);
+  });
+
+  socket.on("stop typing", function () {
+    typingUsers.delete(socket.userName);
+    io.emit("typing", [...typingUsers]);
+  });
+
+  socket.on("disconnect", function () {
+    console.log("disconnect", socket.userName);
+    activeUsers.delete(socket.userName);
+    typingUsers.delete(socket.userName);
+    io.emit("user disconnected", socket.userName);
+    io.emit("typing", [...typingUsers]);
   });
 });

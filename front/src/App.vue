@@ -31,7 +31,10 @@ export default {
       </nav>
     </el-header>
     <el-main class="main"><RouterView /></el-main>
-    <el-footer class="footer">Footer</el-footer>
+    <!-- hide footer in chat page -->
+    <el-footer class="footer" v-show="this.$route.path !== '/chat'">
+      Footer
+    </el-footer>
   </el-container>
 </template>
 
