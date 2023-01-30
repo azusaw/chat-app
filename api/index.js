@@ -1,5 +1,7 @@
 const express = require("express");
+const cors = require("cors");
 const socket = require("socket.io");
+const fs = require("fs");
 
 // App setup
 const PORT = 5001;
@@ -7,9 +9,23 @@ const app = express();
 const index = app.listen(PORT, function () {
   console.log(`Listening on port ${PORT}`);
 });
+const dataFile = "data.json";
 
-// Static files
-// app.use(express.static("public"));
+app.use(cors()); /* Allow other origin request*/
+app.use(express.json()); /* for POST request*/
+
+app.get("/info", function (req, res) {
+  const data = JSON.parse(fs.readFileSync(dataFile, "utf8"));
+  res.send(data);
+});
+
+app.post("/info", (req, res) => {
+  let id = req.body.id;
+  let name = req.body.name;
+  let data = JSON.stringify({ user: { id: id, name: name } }, null, " ");
+  fs.writeFileSync(dataFile, data);
+  res.send();
+});
 
 // Socket setup
 const io = socket(index, {

@@ -7,6 +7,11 @@ export default {
       isTyping: false,
     };
   },
+  props: {
+    typingUsers: {
+      type: Set,
+    },
+  },
   methods: {
     submit: function () {
       this.$emit("sendMessage", this.message);
@@ -15,7 +20,6 @@ export default {
   },
   watch: {
     message(value) {
-      console.log("message changed");
       if (value.length > 0) {
         if (!this.isTyping) {
           this.isTyping = true;
@@ -32,10 +36,14 @@ export default {
 
 <template>
   <div class="container">
+    <div class="typing-users" v-if="typingUsers.length > 0">
+      <span v-for="user in typingUsers" :key="user"> {{ user }}&nbsp; </span>
+      is typing...
+    </div>
     <el-input
       class="chat-text-box"
       v-model="message"
-      placeholder="Input message here!"
+      placeholder="Input messages here!"
       type="textarea"
       resize="none"
       :rows="4"
@@ -61,7 +69,11 @@ export default {
   max-width: 750px;
   position: fixed;
   bottom: 10px;
-  text-align: right;
+}
+.typing-users {
+  margin-left: 10px;
+  font-size: 0.8rem;
+  color: grey;
 }
 .chat-text-box {
   padding: 5px;

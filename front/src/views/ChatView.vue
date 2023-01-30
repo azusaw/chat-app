@@ -73,6 +73,7 @@ export default {
 
 <template>
   <div class="container">
+    <el-empty v-if="messages.length === 0" description="No message" />
     <div v-for="(item, idx) in messages" :key="idx">
       <MessageCard
         :userName="item.userName"
@@ -80,30 +81,22 @@ export default {
         :message="item.message"
       />
     </div>
-
-    <div class="sidenav">
-      <div class="inbox__people">
-        <h4>typing users</h4>
-        <li v-for="user in typingUsers" :key="user">
-          {{ user }}
-        </li>
-      </div>
-    </div>
-    <div class="sidenav">
-      <div class="inbox__people">
-        <h4>Active users</h4>
-        <li v-for="user in activeUsers" :key="user">
-          {{ user }}
-        </li>
-      </div>
-    </div>
-    <ChatTextBox
-      class="chat-text-box"
-      @sendMessage="sendMessage($event, message)"
-      @sendStartTyping="sendStartTyping()"
-      @sendStopTyping="sendStopTyping()"
-    />
   </div>
+  <div class="sidenav">
+    <div class="inbox__people">
+      <h4>Active users</h4>
+      <li v-for="user in activeUsers" :key="user">
+        {{ user }}
+      </li>
+    </div>
+  </div>
+  <ChatTextBox
+    class="chat-text-box"
+    :typingUsers="typingUsers"
+    @sendMessage="sendMessage($event, $message)"
+    @sendStartTyping="sendStartTyping()"
+    @sendStopTyping="sendStopTyping()"
+  />
 </template>
 
 <style scoped>
