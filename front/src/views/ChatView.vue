@@ -82,11 +82,10 @@ export default {
       <span v-for="user in activeUsers" :key="user"> {{ user }}&nbsp; </span>
     </div>
     <div>
-      <el-empty
-        v-if="messages.length === 0"
-        class="empty"
-        description="No message"
-      />
+      <div v-if="messages.length === 0" class="empty">
+        <img src="/public/empty.png" width="300" />
+        <div class="empty-text">No message...</div>
+      </div>
       <div v-else class="message-area">
         <MessageCard
           v-for="(item, idx) in messages"
@@ -120,9 +119,11 @@ export default {
 }
 .empty {
   width: 300px;
-  border-radius: 50%;
-  background-color: aliceblue;
   margin: 100px auto;
+  text-align: center;
+}
+.empty-text {
+  margin-top: 15px;
 }
 
 .message-area {

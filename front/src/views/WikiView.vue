@@ -41,10 +41,15 @@ export default {
 </script>
 
 <template>
-  <div>
-    <h2>Wiki of programing languages</h2>
+  <div class="container">
+    <h1>Wiki of programing languages</h1>
+    <img src="/public/wiki.png" alt="girl_with_pc" width="300" />
     <WikiTable :contents="this.contents" @saveInfo="saveInfo($data)" />
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.container {
+  text-align: center;
+}
+</style>

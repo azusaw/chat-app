@@ -123,6 +123,7 @@ export default {
 <style scoped>
 .table {
   border-radius: 5px;
+  margin: 50px 0;
 }
 .table-expand-contents {
   padding: 10px 30px;
