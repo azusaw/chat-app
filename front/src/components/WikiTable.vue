@@ -10,7 +10,7 @@ export default {
   data() {
     return {
       editingContent: null,
-      editingId: "0",
+      editingId: 0,
     };
   },
   methods: {
@@ -32,13 +32,13 @@ export default {
 </script>
 
 <template>
-  <el-table :data="contents" row-key="id" border>
+  <el-table :data="contents" row-key="id" border class="table">
     <el-table-column type="expand">
       <template #default="props">
         <div class="table-expand-contents">
           <el-button
             v-if="!isEditing(props.row.id)"
-            :disabled="editingId !== '0'"
+            :disabled="editingId !== 0"
             class="edit-button"
             type="primary"
             :onclick="() => changeToEditing(props.row.id)"
@@ -61,7 +61,7 @@ export default {
               type="textarea"
               rows="4"
             />
-            <ul v-else v-for="item in props.row.features.split('¥n')">
+            <ul v-else v-for="item in props.row.features.split('\n')">
               <li>{{ item }}</li>
             </ul>
             <h3>Used for</h3>
@@ -71,7 +71,7 @@ export default {
               type="textarea"
               rows="4"
             />
-            <ul v-else v-for="item in props.row.used.split('¥n')">
+            <ul v-else v-for="item in props.row.used.split('\n')">
               <li>{{ item }}</li>
             </ul>
             <h3>Pros & Cons</h3>
@@ -83,7 +83,7 @@ export default {
                 type="textarea"
                 rows="4"
               />
-              <ul v-else v-for="item in props.row.pros.split('¥n')">
+              <ul v-else v-for="item in props.row.pros.split('\n')">
                 <li>{{ item }}</li>
               </ul>
               <h4>Cons</h4>
@@ -93,7 +93,7 @@ export default {
                 type="textarea"
                 rows="4"
               />
-              <ul v-else v-for="item in props.row.cons.split('¥n')">
+              <ul v-else v-for="item in props.row.cons.split('\n')">
                 <li>{{ item }}</li>
               </ul>
             </div>
@@ -121,6 +121,9 @@ export default {
 </template>
 
 <style scoped>
+.table {
+  border-radius: 5px;
+}
 .table-expand-contents {
   padding: 10px 30px;
 }
