@@ -8,7 +8,8 @@ export default {
       pages: [
         { name: "Home", path: "/" },
         { name: "About", path: "/about" },
-        { name: "Work Summary", path: "/summary" },
+        { name: "Wiki", path: "/wiki" },
+        { name: "Summary", path: "/summary" },
         { name: "Chat", path: "/chat" },
       ],
     };
@@ -33,17 +34,22 @@ export default {
     <el-main class="main"><RouterView /></el-main>
     <!-- hide footer in chat page -->
     <el-footer class="footer" v-show="this.$route.path !== '/chat'">
-      Footer
+      Copyright {{ new Date().getFullYear() }} azusaw All rights reserved.
     </el-footer>
   </el-container>
 </template>
 
 <style scoped>
 .header {
+  position: sticky;
+  top: 0;
   display: flex;
   align-items: center;
-  height: 60px;
-  background-color: lightblue;
+  height: 90px;
+  padding-left: 10px;
+  background-color: var(--primary-color);
+  color: white;
+  z-index: 10;
 }
 
 .nav {
@@ -55,14 +61,28 @@ export default {
 
 .nav-item {
   margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.nav-item:hover {
+  cursor: pointer;
+  color: var(--primary-color);
+  background-color: aliceblue;
+  box-shadow: 0 0 20px 0 aliceblue;
+  transition: 0.5s;
 }
 
 .main {
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 120px);
+  padding: 20px;
 }
 
 .footer {
   height: 40px;
-  background-color: lightblue;
+  text-align: center;
+  font-size: 0.8rem;
+  background-color: var(--primary-color);
 }
 </style>

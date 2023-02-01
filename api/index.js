@@ -20,9 +20,8 @@ app.get("/info", function (req, res) {
 });
 
 app.post("/info", (req, res) => {
-  let id = req.body.id;
-  let name = req.body.name;
-  let data = JSON.stringify({ user: { id: id, name: name } }, null, " ");
+  console.log(req.body.contents);
+  let data = JSON.stringify({ contents: req.body.contents });
   fs.writeFileSync(dataFile, data);
   res.send();
 });
@@ -72,6 +71,6 @@ io.on("connection", function (socket) {
     activeUsers.delete(socket.userName);
     typingUsers.delete(socket.userName);
     io.emit("user disconnected", socket.userName);
-    io.emit("typing", [...typingUsers]);
+    io.emit("typing", typingUsers);
   });
 });

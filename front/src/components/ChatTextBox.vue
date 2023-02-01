@@ -8,8 +8,12 @@ export default {
     };
   },
   props: {
+    userName: {
+      type: String,
+      required: true,
+    },
     typingUsers: {
-      type: Set,
+      type: Array,
     },
   },
   methods: {
@@ -36,10 +40,19 @@ export default {
 
 <template>
   <div class="container">
-    <div class="typing-users" v-if="typingUsers.length > 0">
-      <span v-for="user in typingUsers" :key="user"> {{ user }}&nbsp; </span>
-      is typing...
-    </div>
+    <!-- exclude user himself from typing user -->
+    <span
+      class="typing-users"
+      v-if="
+        typingUsers.length > 0 &&
+        !(typingUsers.length === 1 && typingUsers[0] === userName)
+      "
+    >
+      <span v-for="user in typingUsers" :key="user">
+        <span v-if="user !== userName">{{ user }}</span>
+      </span>
+      typing...
+    </span>
     <el-input
       class="chat-text-box"
       v-model="message"
@@ -52,7 +65,7 @@ export default {
     />
     <el-button
       class="submit-button"
-      type="primary"
+      type="warning"
       size="large"
       round
       icon="Promotion"
@@ -68,16 +81,18 @@ export default {
 .container {
   max-width: 750px;
   position: fixed;
-  bottom: 10px;
-}
-.typing-users {
-  margin-left: 10px;
-  font-size: 0.8rem;
-  color: grey;
+  bottom: 5px;
 }
 .chat-text-box {
   padding: 5px;
   width: 100%;
+}
+.typing-users {
+  font-size: 0.8rem;
+  margin-left: 5px;
+  padding: 5px 10px;
+  background-color: var(--primary-color);
+  border-radius: 5px;
 }
 .submit-button {
   margin: 20px 10px;

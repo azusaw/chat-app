@@ -33,7 +33,7 @@ export default {
 
 <template>
   <div class="message-card">
-    <el-avatar class="avatar" icon="Avatar" />
+    <el-avatar class="avatar" icon="Avatar" size="large" />
     <div class="message-container">
       <span class="user-name">{{ userName }}</span>
       <span class="datetime">
@@ -52,10 +52,11 @@ export default {
 <style scoped>
 .message-card {
   display: flex;
-  margin-top: 15px;
-  background-color: lightblue;
+  margin-top: 30px;
+  background-color: aliceblue;
   border-radius: 5px;
-  padding: 15px 10px;
+  padding: 15px 20px 20px 20px;
+  color: #444;
 }
 .avatar {
   display: flex;
@@ -64,7 +65,7 @@ export default {
 }
 .message-container {
   flex: 1;
-  margin-left: 15px;
+  margin-left: 30px;
 }
 .user-name {
   font-weight: bold;
@@ -75,6 +76,7 @@ export default {
   color: grey;
 }
 .message {
+  margin-top: 10px;
   white-space: pre; /* apply <br> */
 }
 </style>

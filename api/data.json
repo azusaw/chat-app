@@ -1,6 +1,28 @@
 {
- "user": {
-  "id": 5,
-  "name": "piyo"
- }
+  "contents": [
+    {
+      "id": 1,
+      "img": "c.svg",
+      "name": "C",
+      "year": "1972",
+      "inventor": "Dennis MacAlistair Ritchie",
+      "description": "General-purpose programming language developed primarily by Dennis MacAlistair Ritchie at AT&T Bell Labs.",
+      "features": "Languages frequently used in the development of embedded software\nOften used to learn the basics of programming at university\nExploded into prominence when UNIX, originally written in assembly, was rewritten in C",
+      "used": "MacOS, UNIX, Linux, Embedded systems",
+      "pros": "Fast execution speed due to translation into native machine language",
+      "cons": "High degree of difficulty e.g. pointer management"
+    },
+    {
+      "id": 2,
+      "img": "python.svg",
+      "name": "Python",
+      "year": "1991",
+      "inventor": "Guido van Rossum",
+      "description": "General-purpose programming language developed primarily by Dennis MacAlistair Ritchie at AT&T Bell Labs.",
+      "features": "Languages frequently used in the development of embedded software\nOften used to learn the basics of programming at university\nExploded into prominence when UNIX, originally written in assembly, was rewritten in C",
+      "used": "MacOS, UNIX, Linux, Embedded systems",
+      "pros": "Fast execution speed due to translation into native machine language",
+      "cons": "High degree of difficulty e.g. pointer management"
+    }
+  ]
 }
