@@ -140,4 +140,9 @@ export default {
 h3 {
   margin-top: 30px;
 }
+p {
+  /* apply <br> */
+  white-space: pre-wrap;
+  word-break: break-word;
+}
 </style>

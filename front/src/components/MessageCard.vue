@@ -42,9 +42,7 @@ export default {
           datetime.getMinutes().toString().padStart(2, "0")
         }}
       </span>
-      <div class="message">
-        {{ message }}
-      </div>
+      <div class="message">{{ message }}</div>
     </div>
   </div>
 </template>
@@ -65,6 +63,7 @@ export default {
 }
 .message-container {
   flex: 1;
+  max-width: 700px;
   margin-left: 30px;
 }
 .user-name {
@@ -77,6 +76,8 @@ export default {
 }
 .message {
   margin-top: 10px;
-  white-space: pre; /* apply <br> */
+  /* apply <br> */
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 </style>
