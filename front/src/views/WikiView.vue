@@ -43,7 +43,7 @@ export default {
 <template>
   <div class="container">
     <h1>Wiki of programing languages</h1>
-    <img src="/public/wiki.png" alt="girl_with_pc" width="300" />
+    <img src="/assets/wiki.png" alt="girl_with_pc" width="300" />
     <WikiTable :contents="this.contents" @saveInfo="saveInfo($data)" />
   </div>
 </template>

@@ -83,7 +83,7 @@ export default {
     </div>
     <div>
       <div v-if="messages.length === 0" class="empty">
-        <img src="/public/empty.png" width="300" />
+        <img src="/assets/empty.png" width="300" />
         <div class="empty-text">No message...</div>
       </div>
       <div v-else class="message-area">

@@ -3,7 +3,7 @@
 <template>
   <div class="container">
     <h1>Summary of development</h1>
-    <img src="/public/summary.png" alt="cat_with_pc" width="300" />
+    <img src="/assets/summary.png" alt="cat_with_pc" width="300" />
     <div class="summary">
       <blockquote>
         <strong>Nuxt.js</strong> is a free and open source web application

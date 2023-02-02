@@ -11,7 +11,7 @@ export default {
 <template>
   <div class="container">
     <h1>About this website</h1>
-    <img src="/public/about.png" alt="cat_in_box" width="300" />
+    <img src="/assets/about.png" alt="cat_in_box" width="300" />
     <div class="text-container">
       <p>
         Hello again, it's azusaw.<br />

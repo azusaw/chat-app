@@ -5,25 +5,25 @@ export default {
       cards: [
         {
           title: "About",
-          img: "public/about.png",
+          img: "assets/about.png",
           text: "What you can do in here",
           href: "/about",
         },
         {
           title: "Wiki",
-          img: "public/wiki.png",
+          img: "assets/wiki.png",
           text: "Learn about programming",
           href: "/wiki",
         },
         {
           title: "Summary",
-          img: "public/summary.png",
+          img: "assets/summary.png",
           text: "How this website was developed",
           href: "/summary",
         },
         {
           title: "Chat",
-          img: "public/chat.png",
+          img: "assets/chat.png",
           text: "Enjoy real time chatting!",
           href: "/chat",
         },
@@ -35,7 +35,7 @@ export default {
 
 <template>
   <div class="container">
-    <img src="/public/home.png" alt="girl1" width="450" />
+    <img src="/assets/home.png" alt="girl1" width="450" />
     <h1>Welcome to azusaw website!</h1>
     <el-row>
       <el-col :span="6" v-for="(card, idx) in cards" :key="idx">

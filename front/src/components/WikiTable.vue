@@ -111,7 +111,7 @@ export default {
     </el-table-column>
     <el-table-column prop="img" width="70">
       <template #default="scope">
-        <img :src="`/public/icons/${scope.row.img}`" width="40" />
+        <img :src="`/assets/icons/${scope.row.img}`" width="40" />
       </template>
     </el-table-column>
     <el-table-column label="Name" prop="name" width="150" />
