@@ -65,7 +65,7 @@ export default {
     />
     <el-button
       class="submit-button"
-      type="warning"
+      type="primary"
       size="large"
       round
       icon="Promotion"

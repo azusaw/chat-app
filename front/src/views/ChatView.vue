@@ -119,7 +119,7 @@ export default {
 }
 .empty {
   width: 300px;
-  margin: 100px auto;
+  margin: 150px auto;
   text-align: center;
 }
 .empty-text {

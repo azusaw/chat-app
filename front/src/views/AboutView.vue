@@ -14,7 +14,7 @@ export default {
     <img src="/public/about.png" alt="cat_in_box" width="300" />
     <div class="text-container">
       <p>
-        Hello again, it's azusaw<br />
+        Hello again, it's azusaw.<br />
         I'm studying web development at University of Aberdeen.<br />
         <br />
         I created this website to learn new things of web development by
@@ -29,6 +29,7 @@ export default {
         <el-tag effect="dark" round>/Chat</el-tag> ... you can chat with other
         people who viewing his website.
       </p>
+      <p>I hope you enjoy my website! 😊</p>
     </div>
   </div>
 </template>
@@ -40,7 +41,7 @@ export default {
 .text-container {
   max-width: 500px;
   text-align: center;
-  margin: 0 auto;
+  margin: 0 auto 30px;
   line-height: 1.8;
 }
 .nav-info {
