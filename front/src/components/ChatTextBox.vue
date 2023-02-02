@@ -86,6 +86,8 @@ export default {
 .chat-text-box {
   padding: 5px;
   width: 100%;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
 }
 .typing-users {
   font-size: 0.8rem;

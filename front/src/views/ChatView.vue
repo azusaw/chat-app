@@ -2,6 +2,7 @@
 import io from "socket.io-client";
 import MessageCard from "../components/MessageCard.vue";
 import ChatTextBox from "../components/ChatTextBox.vue";
+import { openInfo } from "@/components/notification";
 
 export default {
   components: {
@@ -37,7 +38,6 @@ export default {
 
     // inform stopping typing
     sendStopTyping() {
-      console.log("send stop tuping");
       this.socket.emit("stop typing", this.userName);
     },
   },
@@ -47,13 +47,13 @@ export default {
 
     //when a new user joined
     this.socket.on("new user connected", (data) => {
-      console.log("hello", data);
+      openInfo("New user connected!");
       this.activeUsers = data;
     });
 
     //when a user leaves
     this.socket.on("user disconnected", (data) => {
-      console.log("user disconnected", data, this.activeUsers);
+      openInfo(`${data} disconnected..`);
       //FIXME
       this.activeUsers.remove(data);
       this.typingUsers.remove(data);
@@ -61,6 +61,7 @@ export default {
 
     //when a new message is received
     this.socket.on("chat message", (data) => {
+      data.userName !== this.userName && openInfo("New message is received.");
       this.messages.push({ ...data, datetime: new Date() });
     });
 

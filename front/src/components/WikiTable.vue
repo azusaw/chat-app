@@ -21,11 +21,14 @@ export default {
       this.editingId = id;
       this.editingContent = this.contents.find((content) => content.id === id);
     },
+    cancel: function () {
+      this.editingContent = null;
+      this.editingId = 0;
+    },
     submit: function () {
       let data = this.contents;
       data[this.editingId - 1] = this.editingContent;
-      this.$emit("saveInfo", data);
-      this.editingId = 0;
+      this.$emit("saveInfo", data).then(() => (this.editingId = 0));
     },
   },
 };
@@ -98,14 +101,16 @@ export default {
               </ul>
             </div>
           </div>
-          <el-button
-            v-if="isEditing(props.row.id)"
-            class="edit-button"
-            type="primary"
-            :onclick="submit"
-          >
-            Save
-          </el-button>
+          <div v-if="isEditing(props.row.id)" class="edit-button">
+            <el-button :onclick="cancel"> Cancel </el-button>
+            <el-button
+              v-if="isEditing(props.row.id)"
+              type="primary"
+              :onclick="submit"
+            >
+              Save
+            </el-button>
+          </div>
         </div>
       </template>
     </el-table-column>
@@ -130,6 +135,7 @@ export default {
 }
 .edit-button {
   float: right;
+  margin-bottom: 20px;
 }
 .edit-contents {
   margin: 20px 0;

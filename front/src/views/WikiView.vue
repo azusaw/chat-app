@@ -1,5 +1,6 @@
 <script>
 import WikiTable from "@/components/WikiTable.vue";
+import { openSuccess, openError } from "@/components/notification";
 export default {
   components: { WikiTable },
   data() {
@@ -19,7 +20,8 @@ export default {
         },
       })
         .then((response) => response.json())
-        .then((data) => (this.contents = data.contents));
+        .then((data) => (this.contents = data.contents))
+        .catch((err) => openError(err));
     },
     saveInfo: function (data) {
       fetch("http://localhost:5001/info", {
@@ -30,8 +32,11 @@ export default {
         },
         body: JSON.stringify(data),
       })
-        .then(() => this.getInfo())
-        .catch((err) => console.log(err));
+        .then(() => {
+          openSuccess("The page was updated.");
+          this.getInfo();
+        })
+        .catch((err) => openError(err));
     },
   },
   created() {
