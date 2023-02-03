@@ -24,6 +24,11 @@ app.post("/info", (req, res) => {
   res.send(200);
 });
 
+/* prevent 404 error when user typed URL in browser directory */
+app.use("/*", (req, res) => {
+  res.sendFile(`${__dirname}/public/index.html`);
+});
+
 // Socket setup
 const io = socket(index, {
   pingTimeout: 4000,
