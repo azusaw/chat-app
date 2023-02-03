@@ -49,10 +49,7 @@ io.on("connection", function (socket) {
   });
 
   socket.on("chat message", function (data) {
-    console.log("chat message", data);
     io.emit("chat message", data);
-    typingUsers.delete(data.userName);
-    io.emit("typing", [...typingUsers]);
   });
 
   socket.on("start typing", function () {
@@ -66,6 +63,13 @@ io.on("connection", function (socket) {
   });
 
   socket.on("disconnect", function () {
+    activeUsers.delete(socket.userName);
+    typingUsers.delete(socket.userName);
+    io.emit("user disconnected", socket.userName);
+    io.emit("typing", typingUsers);
+  });
+
+  socket.on("user disconnect", function () {
     activeUsers.delete(socket.userName);
     typingUsers.delete(socket.userName);
     io.emit("user disconnected", socket.userName);

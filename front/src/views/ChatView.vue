@@ -28,13 +28,12 @@ export default {
       });
     },
 
-    // inform starting typing
+    // inform started typing
     sendStartTyping() {
-      console.log("send start typing");
       this.socket.emit("start typing", this.userName);
     },
 
-    // inform stopping typing
+    // inform stopped typing
     sendStopTyping() {
       this.socket.emit("stop typing", this.userName);
     },
@@ -51,7 +50,9 @@ export default {
 
     //when a user leaves
     this.socket.on("user disconnected", (data) => {
-      openInfo(`${data} disconnected..`);
+      if (this.userName !== data) {
+        openInfo(`${data} disconnected..`);
+      }
       //FIXME
       this.activeUsers.remove(data);
       this.typingUsers.remove(data);
@@ -59,14 +60,19 @@ export default {
 
     //when a new message is received
     this.socket.on("chat message", (data) => {
-      data.userName !== this.userName && openInfo("New message is received.");
+      if (data.userName !== this.userName) {
+        openInfo("New message!");
+      }
       this.messages.push({ ...data, datetime: new Date() });
     });
 
-    //when a typing condition is changed
+    //when a typing condition has changed
     this.socket.on("typing", (data) => {
       this.typingUsers = data;
     });
+  },
+  beforeUnmount() {
+    this.socket.emit("user disconnect", this.userName);
   },
 };
 </script>
