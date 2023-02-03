@@ -23,11 +23,12 @@ export default {
       </p>
       <p class="nav-info">
         <el-tag effect="dark" round>/Wiki</el-tag> ... you can see a brief
-        introduction to each programming language.<br /><br />
+        introduction to each programming language.<br />
+        you can update information if you want!<br /><br />
         <el-tag effect="dark" round>/Summary</el-tag> ... you can see summary of
         that how I developed this website.<br /><br />
         <el-tag effect="dark" round>/Chat</el-tag> ... you can chat with other
-        people who viewing his website.
+        people who is viewing this website.
       </p>
       <p>I hope you enjoy my website! 😊</p>
     </div>

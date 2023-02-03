@@ -16,9 +16,7 @@ export default {
       messages: [],
       userName:
         "user-" + Math.floor(Math.random() * 1000000) /* 6digits user id*/,
-      socket: io("localhost:5001", {
-        withCredentials: true,
-      }),
+      socket: io(),
     };
   },
   methods: {

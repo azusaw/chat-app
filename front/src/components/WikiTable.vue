@@ -28,7 +28,8 @@ export default {
     submit: function () {
       let data = this.contents;
       data[this.editingId - 1] = this.editingContent;
-      this.$emit("saveInfo", data).then(() => (this.editingId = 0));
+      this.$emit("saveInfo", data);
+      this.editingId = 0;
     },
   },
 };

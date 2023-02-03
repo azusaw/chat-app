@@ -5,25 +5,25 @@ export default {
       cards: [
         {
           title: "About",
-          img: "assets/about.png",
+          img: "/assets/about.png",
           text: "What you can do in here",
           href: "/about",
         },
         {
           title: "Wiki",
-          img: "assets/wiki.png",
+          img: "/assets/wiki.png",
           text: "Learn about programming",
           href: "/wiki",
         },
         {
           title: "Summary",
-          img: "assets/summary.png",
+          img: "/assets/summary.png",
           text: "How this website was developed",
           href: "/summary",
         },
         {
           title: "Chat",
-          img: "assets/chat.png",
+          img: "/assets/chat.png",
           text: "Enjoy real time chatting!",
           href: "/chat",
         },

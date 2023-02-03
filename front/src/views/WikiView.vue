@@ -12,7 +12,7 @@ export default {
   },
   methods: {
     getInfo: function () {
-      fetch("http://localhost:5001/info", {
+      fetch("/info", {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -24,7 +24,7 @@ export default {
         .catch((err) => openError(err));
     },
     saveInfo: function (data) {
-      fetch("http://localhost:5001/info", {
+      fetch("/info", {
         method: "POST",
         headers: {
           Accept: "application/json",
