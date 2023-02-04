@@ -1,12 +1,4 @@
-<script>
-export default {
-  data() {
-    return {
-      users: [],
-    };
-  },
-};
-</script>
+<script></script>
 
 <template>
   <div class="container">
