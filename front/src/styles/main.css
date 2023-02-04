@@ -1,6 +1,7 @@
 :root {
     --primary-color: #08498a;
     --secondary-color: #ea9f06;
+    --header-height: 90px;
 }
 
 body {
@@ -16,4 +17,9 @@ body {
 a {
     text-decoration: none;
     color: inherit;
+}
+
+a:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }

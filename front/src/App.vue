@@ -7,10 +7,10 @@ export default {
     return {
       pages: [
         { name: "Home", path: "/" },
-        { name: "About", path: "/about" },
-        { name: "Wiki", path: "/wiki" },
-        { name: "Summary", path: "/summary" },
-        { name: "Chat", path: "/chat" },
+        { name: "About", path: "/about/" },
+        { name: "Wiki", path: "/wiki/" },
+        { name: "Summary", path: "/summary/" },
+        { name: "Chat", path: "/chat/" },
       ],
     };
   },
@@ -45,7 +45,7 @@ export default {
   top: 0;
   display: flex;
   align-items: center;
-  height: 90px;
+  height: var(--header-height);
   padding-left: 10px;
   background-color: var(--primary-color);
   color: white;

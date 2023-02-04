@@ -23,9 +23,10 @@ export default {
         .then((data) => (this.contents = data.contents))
         .catch((err) => openError(err));
     },
+    // FIXME
     saveInfo: function (data) {
       fetch("/info", {
-        method: "POST",
+        method: "PUT",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
