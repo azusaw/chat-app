@@ -83,12 +83,20 @@ export default {
   position: fixed;
   bottom: 5px;
 }
+
+@media screen and (max-width: 750px) {
+  .container {
+    max-width: 90vw;
+  }
+}
+
 .chat-text-box {
   padding: 5px;
   width: 100%;
   font-size: 1.1rem;
   letter-spacing: 1px;
 }
+
 .typing-users {
   font-size: 0.8rem;
   margin-left: 5px;
@@ -96,6 +104,7 @@ export default {
   background-color: var(--primary-color);
   border-radius: 5px;
 }
+
 .submit-button {
   margin: 20px 10px;
   position: absolute;

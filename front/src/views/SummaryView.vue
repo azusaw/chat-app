@@ -653,7 +653,30 @@
       </code></pre>
 
       <h3 id="sum-12">12. Responsive</h3>
+      UIフレームワークによってはレスポンシブ対応を簡単に実装するコンポーネントが用意されている。（例：Vuetify,
+      MaterialUI）
+      残念ながら、Element+にはレスポンシブ用のコンポーネントが用意されていなかったので、CSSのメディアクエリで実装した。
+      <pre><code>
+      /* App.vue */
 
+      &lt;style scoped>
+      /* apply when screen width is smaller than 660px */
+      @media screen and (max-width: 660px) {
+        .pc-nav {
+          display: none;
+        }
+      }
+
+      /* apply when screen width is wider than 661px */
+      @media screen and (min-width: 661px) {
+        .mobile-nav {
+          display: none;
+        }
+      }
+      &lt;/style>
+      </code></pre>
+      このように、画面サイズで切り替えたいCSSを切り替えたいパーツごとに実装した。
+      具体的には、ヘッダーメニューとチャットページのテキストボックス。
       <h3 id="sum-13">13. Retrospective</h3>
     </div>
   </div>

@@ -120,8 +120,15 @@ export default {
   background-color: var(--secondary-color);
   font-weight: 500;
   width: 100%;
-  max-width: 740px;
+  max-width: 750px;
 }
+
+@media screen and (max-width: 750px) {
+  .active-user {
+    max-width: 90vw;
+  }
+}
+
 .empty {
   width: 300px;
   margin: 150px auto;
