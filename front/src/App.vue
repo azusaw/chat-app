@@ -31,6 +31,7 @@ export default {
   <el-container class="container">
     <el-header class="header">
       <LogoSvg />
+      <!-- Navigation for PC -->
       <nav class="pc-nav">
         <RouterLink
           class="nav-item"
@@ -40,6 +41,7 @@ export default {
           >{{ item.name }}</RouterLink
         >
       </nav>
+      <!-- Navigation for mobile -->
       <div class="mobile-nav" :onclick="openDrawer">Menu</div>
       <el-drawer v-model="drawer" size="300">
         <nav>
@@ -55,7 +57,7 @@ export default {
       </el-drawer>
     </el-header>
     <el-main class="main"><RouterView /></el-main>
-    <!-- hide footer in chat page -->
+    <!-- Hide footer in chat page -->
     <el-footer class="footer" v-show="this.$route.path !== '/chat/'">
       Copyright {{ new Date().getFullYear() }} azusaw All rights reserved.
     </el-footer>
@@ -67,6 +69,9 @@ export default {
   margin: 0 auto;
   padding: 0;
   max-width: 800px;
+  /* apply \n to <br> */
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 @media screen and (max-width: 800px) {
@@ -95,14 +100,14 @@ export default {
   justify-content: end;
 }
 
-/* apply when screen width is smaller than 660px */
+/* Hidden navigation for PC when screen width is smaller than 660px */
 @media screen and (max-width: 660px) {
   .pc-nav {
     display: none;
   }
 }
 
-/* apply when screen width is wider than 661px */
+/* Hidden navigation for mobile when screen width is wider than 661px */
 @media screen and (min-width: 661px) {
   .mobile-nav {
     display: none;
@@ -131,7 +136,7 @@ export default {
 }
 
 .main {
-  min-height: calc(100vh - 120px);
+  min-height: calc(100vh - 130px);
   padding: 20px 10px;
   max-width: 100vw;
 }

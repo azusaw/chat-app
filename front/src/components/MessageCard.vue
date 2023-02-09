@@ -1,4 +1,5 @@
 <script>
+/* Message card in chat page */
 export default {
   name: "MessageCard",
   props: {
@@ -21,7 +22,7 @@ export default {
     };
   },
   mounted() {
-    /* create a hexadecimal color cord from user name */
+    /* Create a hexadecimal color cord from user name easy for each user */
     this.colorCord =
       "#" +
       Number(this.userName.slice(5) * 10)
@@ -56,28 +57,30 @@ export default {
   padding: 15px 20px 20px 20px;
   color: #444;
 }
+
 .avatar {
   display: flex;
   float: left;
   background-color: v-bind(colorCord);
 }
+
 .message-container {
   flex: 1;
   max-width: 700px;
   margin-left: 30px;
 }
+
 .user-name {
   font-weight: bold;
 }
+
 .datetime {
   margin-left: 15px;
   font-size: 0.9rem;
   color: grey;
 }
+
 .message {
   margin-top: 10px;
-  /* apply <br> */
-  white-space: pre-wrap;
-  word-break: break-word;
 }
 </style>

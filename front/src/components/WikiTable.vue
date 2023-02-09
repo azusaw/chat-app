@@ -1,4 +1,5 @@
 <script>
+/* Information table in wiki page */
 export default {
   name: "WikiTable",
   props: {
@@ -14,17 +15,22 @@ export default {
     };
   },
   methods: {
+    /* Check the item which has given ID is editing or not */
+    /* return: Boolean */
     isEditing: function (id) {
       return this.editingId === id;
     },
+    /* Change the ID of item which is editing */
     changeToEditing: function (id) {
       this.editingId = id;
       this.editingContent = this.contents.find((content) => content.id === id);
     },
+    /* Discard the item changes */
     cancel: function () {
       this.editingContent = null;
       this.editingId = 0;
     },
+    /* Call /info PUT request and reset the temporary values for editing */
     submit: function () {
       let data = this.contents;
       data[this.editingId - 1] = this.editingContent;
@@ -36,20 +42,29 @@ export default {
 </script>
 
 <template>
-  <el-table :data="contents" row-key="id" border class="table">
+  <el-table
+    :data="contents"
+    row-key="id"
+    border
+    class="table"
+    :expand-row-keys="[1]"
+  >
+    <!-- Column which is expandable -->
     <el-table-column type="expand">
       <template #default="props">
         <div class="table-expand-contents">
+          <!-- Hide "Edit" button if it is editing -->
           <el-button
             v-if="!isEditing(props.row.id)"
             :disabled="editingId !== 0"
-            class="edit-button"
+            class="control-button"
             type="primary"
             :onclick="() => changeToEditing(props.row.id)"
           >
             Edit
           </el-button>
-          <div class="edit-contents">
+          <!-- Switch each element of content <p>,<ul><li> to <el-input> if it is editing -->
+          <div class="editable-contents">
             <h3>Description</h3>
             <el-input
               v-if="isEditing(props.row.id)"
@@ -102,7 +117,8 @@ export default {
               </ul>
             </div>
           </div>
-          <div v-if="isEditing(props.row.id)" class="edit-button">
+          <!-- Show "Cancel" and "Save" buttons if it is editing-->
+          <div v-if="isEditing(props.row.id)" class="control-button">
             <el-button :onclick="cancel"> Cancel </el-button>
             <el-button
               v-if="isEditing(props.row.id)"
@@ -115,6 +131,7 @@ export default {
         </div>
       </template>
     </el-table-column>
+    <!-- Columns which are always shown -->
     <el-table-column prop="img" width="70">
       <template #default="scope">
         <img :src="`/assets/icons/${scope.row.img}`" width="40" />
@@ -131,25 +148,25 @@ export default {
   border-radius: 5px;
   margin: 50px 0;
 }
+
 .table-expand-contents {
   padding: 10px 30px;
 }
-.edit-button {
+
+.control-button {
   float: right;
   margin-bottom: 20px;
 }
-.edit-contents {
+
+.editable-contents {
   margin: 20px 0;
 }
+
 .pros-cons {
   margin-left: 20px;
 }
+
 h3 {
   margin-top: 30px;
-}
-p {
-  /* apply <br> */
-  white-space: pre-wrap;
-  word-break: break-word;
 }
 </style>

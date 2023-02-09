@@ -1,4 +1,5 @@
 <script>
+/* Input text box in chat page */
 export default {
   name: "ChatTextBox",
   data() {
@@ -22,6 +23,7 @@ export default {
       this.message = "";
     },
   },
+  /* Watch message update to send notification of typing to server */
   watch: {
     message(value) {
       if (value.length > 0) {
@@ -40,7 +42,7 @@ export default {
 
 <template>
   <div class="container">
-    <!-- exclude user himself from typing user -->
+    <!-- exclude user himself from displayed typing user -->
     <span
       class="typing-users"
       v-if="
@@ -79,14 +81,14 @@ export default {
 
 <style scoped>
 .container {
-  max-width: 750px;
+  width: 750px;
   position: fixed;
   bottom: 5px;
 }
 
 @media screen and (max-width: 750px) {
   .container {
-    max-width: 90vw;
+    width: 90vw;
   }
 }
 

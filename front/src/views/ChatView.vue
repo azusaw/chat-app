@@ -1,4 +1,5 @@
 <script>
+/* Chat page view */
 import io from "socket.io-client";
 import MessageCard from "../components/MessageCard.vue";
 import ChatTextBox from "../components/ChatTextBox.vue";
@@ -14,41 +15,40 @@ export default {
       activeUsers: [],
       typingUsers: [],
       messages: [],
+      /* Create random user name copied from template file */
       userName:
         "user-" + Math.floor(Math.random() * 1000000) /* 6digits user id*/,
       socket: io(),
     };
   },
   methods: {
-    // send a message to server
+    /* Send a notification of new message to server with socket.io */
     sendMessage(message) {
       this.socket.emit("chat message", {
         message: message,
         userName: this.userName,
       });
     },
-
-    // inform started typing
+    /* Send a notification of typing is started to server with socket.io */
     sendStartTyping() {
       this.socket.emit("start typing", this.userName);
     },
-
-    // inform stopped typing
+    /* Send a notification of typing is stopped to server with socket.io */
     sendStopTyping() {
       this.socket.emit("stop typing", this.userName);
     },
   },
   mounted() {
-    //emit an event with the user id
+    /* Send a notification of himself connection to server with socket.io */
     this.socket.emit("user connected", this.userName);
 
-    //when a new user joined
+    /* Listen a notification of new user connection from server with socket.io */
     this.socket.on("new user connected", (data) => {
       openInfo("New user connected!");
       this.activeUsers = data;
     });
 
-    //when a user leaves
+    /* Listen a notification of user disconnection from server with socket.io */
     this.socket.on("user disconnected", (data) => {
       if (this.userName !== data) {
         openInfo(`${data} disconnected..`);
@@ -58,19 +58,21 @@ export default {
       this.typingUsers.remove(data);
     });
 
-    //when a new message is received
+    /* Listen a notification of new message from server with socket.io */
     this.socket.on("chat message", (data) => {
+      /* Exclude himself message */
       if (data.userName !== this.userName) {
         openInfo("New message!");
       }
       this.messages.push({ ...data, datetime: new Date() });
     });
 
-    //when a typing condition has changed
+    /* Listen a notification of typing condition from server with socket.io */
     this.socket.on("typing", (data) => {
       this.typingUsers = data;
     });
   },
+  /* Send a notification of himself disconnection to server with socket.io */
   beforeUnmount() {
     this.socket.emit("user disconnect", this.userName);
   },
@@ -87,7 +89,7 @@ export default {
       <span v-for="user in activeUsers" :key="user"> {{ user }}&nbsp; </span>
     </div>
     <div>
-      <div v-if="messages.length === 0" class="empty">
+      <div v-if="messages.length === 0" class="empty-container">
         <img src="/assets/empty.png" width="300" />
         <div class="empty-text">No message...</div>
       </div>
@@ -101,7 +103,6 @@ export default {
         />
       </div>
       <ChatTextBox
-        class="chat-text-box"
         :userName="userName"
         :typingUsers="typingUsers"
         @sendMessage="sendMessage($event, $message)"
@@ -129,21 +130,17 @@ export default {
   }
 }
 
-.empty {
+.empty-container {
   width: 300px;
   margin: 150px auto;
   text-align: center;
 }
+
 .empty-text {
   margin-top: 15px;
 }
 
 .message-area {
   margin-bottom: 120px; /* avoid overlapping with message box*/
-}
-
-.chat-text-box {
-  /*position: fixed;*/
-  /*bottom: 0;*/
 }
 </style>

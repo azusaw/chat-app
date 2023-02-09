@@ -1,4 +1,29 @@
-<script></script>
+<script>
+/* About page view */
+export default {
+  data() {
+    return {
+      navInfo: [
+        {
+          name: "/Wiki",
+          description:
+            "You can see a brief introduction to each programming language.\nYou can edit information if you want!",
+        },
+        {
+          name: "/Summary",
+          description:
+            "You can see summary of that how I developed this website.",
+        },
+        {
+          name: "/Chat",
+          description:
+            "You can enjoy chat with other people who is viewing this website.",
+        },
+      ],
+    };
+  },
+};
+</script>
 
 <template>
   <div class="container">
@@ -13,14 +38,11 @@
         myself<br />
         and hope to help people who learn programming.<br />
       </p>
-      <p class="nav-info">
-        <el-tag effect="dark" round>/Wiki</el-tag> ... you can see a brief
-        introduction to each programming language.<br />
-        you can update information if you want!<br /><br />
-        <el-tag effect="dark" round>/Summary</el-tag> ... you can see summary of
-        that how I developed this website.<br /><br />
-        <el-tag effect="dark" round>/Chat</el-tag> ... you can chat with other
-        people who is viewing this website.
+      <h2>What you can do</h2>
+      <p v-for="(item, idx) in navInfo" :key="idx" class="nav-info">
+        <el-tag effect="dark" type="warning" round>{{ item.name }}</el-tag>
+        ...
+        {{ item.description }}
       </p>
       <p>I hope you enjoy my website! 😊</p>
     </div>
@@ -31,13 +53,19 @@
 .container {
   text-align: center;
 }
+
 .text-container {
   max-width: 500px;
   text-align: center;
   margin: 0 auto 30px;
   line-height: 1.8;
 }
+
 .nav-info {
-  margin: 50px 0 30px;
+  margin: 30px 0;
+}
+
+h2 {
+  margin-top: 50px;
 }
 </style>

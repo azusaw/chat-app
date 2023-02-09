@@ -1,16 +1,17 @@
 <script>
+/* Wiki page view */
 import WikiTable from "@/components/WikiTable.vue";
 import { openSuccess, openError } from "@/components/notification";
+
 export default {
   components: { WikiTable },
   data() {
     return {
       contents: [],
-      editingContent: null,
-      editingId: "0",
     };
   },
   methods: {
+    /* Send GET /info request to server */
     getInfo: function () {
       fetch("/info", {
         method: "GET",
@@ -24,6 +25,7 @@ export default {
         .catch((err) => openError(err));
     },
     // FIXME
+    /* Send PUT /info request to server with new data */
     saveInfo: function (data) {
       fetch("/info", {
         method: "PUT",
@@ -35,11 +37,13 @@ export default {
       })
         .then(() => {
           openSuccess("The page was updated.");
+          /* Update displayed information */
           this.getInfo();
         })
         .catch((err) => openError(err));
     },
   },
+  /* Get information when component is created */
   created() {
     this.getInfo();
   },
