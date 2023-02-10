@@ -35,15 +35,27 @@ export default {
       <section id="sum-1">
         <h3>1. Final outputs</h3>
         <ul>
-          <!--          FIX ME-->
-          <li>Github repository: <a href="">chat-app/azusaw</a></li>
-          <li>Codio path: /CA4/....</li>
+          <li>
+            Github repository:
+            <a href="https://github.com/azusaw/chat-app" target="_blank"
+              >azusaw/chat-app</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://codio.co.uk/awatanabe/cs551s-practicals-and-assignments"
+              target="_blank"
+              >Codio</a
+            >
+          </li>
+          <li>File path in Codio: /CA4</li>
         </ul>
         <p></p>
         <h4>Architecture</h4>
         <p>
-          基本的にはテンプレートとして配布されたファイルと同じ構成である。Wikiページの更新のためのファイルr/wは、ExpressでのHTTP
-          request経由で行うように実装した。
+          Basically the same configuration as the files distributed as
+          templates; the file r/w for updating the wiki pages was implemented
+          via HTTP request by using Express.
         </p>
         <img src="/assets/summary/arch.jpg" alt="architecture" />
         <h4>How to deploy</h4>
