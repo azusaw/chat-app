@@ -43,11 +43,11 @@ export default {
 
 <template>
   <el-table
-    :data="contents"
     row-key="id"
+    :data="contents"
+    :expand-row-keys="[1]"
     border
     class="table"
-    :expand-row-keys="[1]"
   >
     <!-- Column which is expandable -->
     <el-table-column type="expand">
@@ -137,7 +137,7 @@ export default {
         <img :src="`/assets/icons/${scope.row.img}`" width="40" />
       </template>
     </el-table-column>
-    <el-table-column label="Name" prop="name" width="150" />
+    <el-table-column label="Name" prop="name" width="110" />
     <el-table-column label="Year" prop="year" width="70" />
     <el-table-column label="Inventor" prop="inventor" />
   </el-table>
@@ -147,6 +147,7 @@ export default {
 .table {
   border-radius: 5px;
   margin: 50px 0;
+  max-width: 95vw;
 }
 
 .table-expand-contents {

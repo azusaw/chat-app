@@ -30,7 +30,9 @@ export default {
 <template>
   <el-container class="container">
     <el-header class="header">
-      <LogoSvg />
+      <RouterLink to="/">
+        <LogoSvg />
+      </RouterLink>
       <!-- Navigation for PC -->
       <nav class="pc-nav">
         <RouterLink
@@ -98,6 +100,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: end;
+  gap: 10px;
 }
 
 /* Hidden navigation for PC when screen width is smaller than 660px */

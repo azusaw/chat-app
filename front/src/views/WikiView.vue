@@ -24,7 +24,6 @@ export default {
         .then((data) => (this.contents = data.contents))
         .catch((err) => openError(err));
     },
-    // FIXME
     /* Send PUT /info request to server with new data */
     saveInfo: function (data) {
       fetch("/info", {
@@ -37,7 +36,7 @@ export default {
       })
         .then(() => {
           openSuccess("The page was updated.");
-          /* Update displayed information */
+          /* Update information which is displayed */
           this.getInfo();
         })
         .catch((err) => openError(err));

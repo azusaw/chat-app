@@ -36,7 +36,7 @@ export default {
 
 <template>
   <div class="container">
-    <img src="/assets/home.png" alt="girl1" width="450" />
+    <img src="/assets/home.png" alt="girl1" class="top-img" />
     <h1>Welcome to azusaw website!</h1>
     <el-row :gutter="10" justify="space-around">
       <el-col :xs="12" :sm="6" v-for="(card, idx) in cards" :key="idx">
@@ -59,6 +59,12 @@ export default {
   text-align: center;
 }
 
+.top-img {
+  margin: 3rem auto;
+  width: 450px;
+  max-width: 90vw;
+}
+
 .card {
   width: 180px;
   margin-bottom: 50px;
@@ -75,10 +81,6 @@ export default {
 
 .text {
   font-size: 0.9rem;
-}
-
-img {
-  margin: 3rem auto;
 }
 
 h1 {

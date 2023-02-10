@@ -53,14 +53,22 @@ export default {
       if (this.userName !== data) {
         openInfo(`${data} disconnected..`);
       }
-      //FIXME
-      this.activeUsers.remove(data);
-      this.typingUsers.remove(data);
+      /* Remove disconnected user from user lists */
+      if (this.activeUsers?.length > 0) {
+        this.activeUsers = this.activeUsers.filter(
+          (userName) => userName !== data
+        );
+      }
+      if (this.typingUsers?.length > 0) {
+        this.typingUsers = this.typingUsers.filter(
+          (userName) => userName !== data
+        );
+      }
     });
 
     /* Listen a notification of new message from server with socket.io */
     this.socket.on("chat message", (data) => {
-      /* Exclude himself message */
+      /* Exclude a message which is sent by himself */
       if (data.userName !== this.userName) {
         openInfo("New message!");
       }
@@ -82,10 +90,10 @@ export default {
 <template>
   <div class="container">
     <div class="active-user">
-      {{ activeUsers.size }}
-      <span v-if="activeUsers.size === 1">user is</span>
+      {{ activeUsers.length }}
+      <span v-if="activeUsers.length === 1">user is</span>
       <span v-else>users are</span>
-      online! :
+      online:
       <span v-for="user in activeUsers" :key="user"> {{ user }}&nbsp; </span>
     </div>
     <div>
