@@ -23,7 +23,7 @@ app.get("/info", (req, res) => {
 app.put("/info", (req, res) => {
   let data = JSON.stringify({ contents: req.body.contents });
   fs.writeFileSync(dataFile, data);
-  res.send(200);
+  res.sendStatus(200);
 });
 
 /* Prevent 404 error when user typed URL in browser directory */
