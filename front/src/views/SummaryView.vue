@@ -400,8 +400,8 @@ export default {
             socket.on: <code>typing</code>
             <ul>
               <li>
-                Created for receiving an event from clients when new message was
-                sent
+                Created for receiving an event from clients when a client
+                started/stopped typing
               </li>
               <li>Callback: update typing users</li>
             </ul>
@@ -838,8 +838,21 @@ export default {
            <b>@keyup.ctrl.enter="submit"</b>
       />
       </code></pre>
-
-      <p></p>
+      <h4>iv. Reduce the size of outputs</h4>
+      <p>
+        During build, /asset/ generated a warning that the following files were
+        too large. Then all image files were compressed to shorten the loading
+        time.
+      </p>
+      <img src="/assets/summary/warning.jpg" alt="warning" />
+      <p>
+        All the image was compressed, but the warning did not disappear. Looking
+        carefully, the warning suggests that it is warning that the javascript
+        file containing the process is large. I would like to consider a method
+        to split the file into separate files so that they can be imported as
+        required, but as there is not enough time this time, it will be an issue
+        for the next time or later.
+      </p>
     </div>
   </div>
 </template>
