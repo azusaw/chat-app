@@ -3,7 +3,7 @@ const socket = require("socket.io");
 const fs = require("fs");
 
 /* App setup */
-const PORT = 5001;
+const PORT = !!process.env.PORT ? process.env.PORT : "5001";
 const app = express();
 const index = app.listen(PORT, function () {
   console.log(`Listening on port ${PORT}`);
